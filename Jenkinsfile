@@ -41,7 +41,8 @@ spec:
       container('docker') {
         sh "docker pull python"
         sh "docker tag python caozz0828/monster:v3"
-        sh "env"
+        sh "docker login -u $DOCKERHUBUSER -p $DOCKERHUBPASS"
+        sh "docker push caozz0828/monster:v1"
       }
     }
   }
