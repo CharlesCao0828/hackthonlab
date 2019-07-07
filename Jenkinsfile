@@ -9,15 +9,21 @@ spec:
     image: docker:1.11
     command: ['cat']
     env:
-      -name: DOCKERHUBUSER
-      valueFrom:
-        configMapKeyRef:
-          name: mydockerhub
-          key: registry-login.username
-      -name: DOCKERHUBPASS
-        configMapKeyRef:
-          name: mydockerhub
-          key: registry-login.password
+        # Define the environment variable
+        - name: DOCKERHUBUSER
+          valueFrom:
+            configMapKeyRef:
+              # The ConfigMap containing the value you want to assign to SPECIAL_LEVEL_KEY
+              name: dockerhub
+              # Specify the key associated with the value
+              key: user.name
+        - name: DOCKERHUBPASS
+          valueFrom:
+            configMapKeyRef:
+              # The ConfigMap containing the value you want to assign to SPECIAL_LEVEL_KEY
+              name: dockerhub
+              # Specify the key associated with the value
+              key: user.pass
     tty: true
     volumeMounts:
     - name: dockersock
@@ -26,7 +32,6 @@ spec:
   - name: dockersock
     hostPath:
       path: /var/run/docker.sock
-  
 """
   ) {
 
