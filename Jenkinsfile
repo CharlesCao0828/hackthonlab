@@ -22,9 +22,8 @@ spec:
   def image = "jenkins/jnlp-slave"
   node(label) {
     stage('Build Docker image') {
-      git 'https://github.com/CharlesCao0828/hackthonlab.git'
       container('docker') {
-        sh "docker build -t ${image} ."
+        sh "docker pull python"
       }
     }
   }
