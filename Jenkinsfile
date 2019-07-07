@@ -24,6 +24,8 @@ spec:
     stage('Build Docker image') {
       container('docker') {
         sh "docker pull python"
+        sh "docker tag python caozz0828/monster:v3"
+        sh "docker push caozz0828/monster:v3"
       }
     }
   }
