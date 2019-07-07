@@ -16,6 +16,8 @@ spec:
   - name: dockersock
     hostPath:
       path: /var/run/docker.sock
+  imagePullSecrets:
+  - name: mydockerhub
 """
   ) {
 
