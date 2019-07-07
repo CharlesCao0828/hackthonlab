@@ -8,6 +8,16 @@ spec:
   - name: docker
     image: docker:1.11
     command: ['cat']
+    env:
+      -name: DOCKERHUBUSER
+      valueFrom:
+        configMapKeyRef:
+          name: mydockerhub
+          key: registry-login.username
+      -name: DOCKERHUBPASS
+        configMapKeyRef:
+          name: mydockerhub
+          key: registry-login.password
     tty: true
     volumeMounts:
     - name: dockersock
@@ -16,6 +26,7 @@ spec:
   - name: dockersock
     hostPath:
       path: /var/run/docker.sock
+  
 """
   ) {
 
@@ -25,8 +36,7 @@ spec:
       container('docker') {
         sh "docker pull python"
         sh "docker tag python caozz0828/monster:v3"
-        sh "docker login -u caozz0828 -p Aws@12345"
-        sh "docker push caozz0828/monster:v3"
+        sh "env"
       }
     }
   }
